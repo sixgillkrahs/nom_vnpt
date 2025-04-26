@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\common.props" />
+	<Import Project="..\..\configureawait.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<RootNamespace>CSP_NET.Work</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CSP.NotificationConfig.EntityFrameworkCore" Version="0.3.7" />
+		<ProjectReference Include="..\CSP_NET.Work.Domain\CSP_NET.Work.Domain.csproj" />
+		<PackageReference Include="CTIN.Abp.EntityFrameworkCore.SqlServer" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.PermissionManagement.EntityFrameworkCore" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.SettingManagement.EntityFrameworkCore" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Identity.EntityFrameworkCore" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.BackgroundJobs.EntityFrameworkCore" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.AuditLogging.EntityFrameworkCore" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.TenantManagement.EntityFrameworkCore" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.FeatureManagement.EntityFrameworkCore" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.OpenIddict.EntityFrameworkCore" Version="0.3.7" />
+		<PackageReference Include="CSP.Category.EntityFrameworkCore" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.NotificationService.EntityFrameworkCore" Version="0.3.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.1">
+		</PackageReference>
+	</ItemGroup>
+
+</Project>

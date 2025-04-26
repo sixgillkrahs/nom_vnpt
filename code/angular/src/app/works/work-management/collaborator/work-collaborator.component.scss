@@ -1,0 +1,20 @@
+.avatar {
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    margin-right: 1rem;
+    object-fit: cover;
+  }
+
+  ::ng-deep .small-size{
+    width: 96% !important
+  }
+
+  ::ng-deep .default-size{
+    width: auto !important;
+  }
+
+  ::ng-deep .fixed-size{
+    width: 1000px !important;
+  }
+

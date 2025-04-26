@@ -1,0 +1,152 @@
+<div [ngClass]="{ card: card }" [abpLoading]="isLoading">
+  <p-treeTable
+    #tt
+    [value]="treeData"
+    [filterMode]="'lenient'"
+    [lazy]="true"
+    (onLazyLoad)="loadNodes($event)"
+    [totalRecords]="totalCount"
+    (onNodeExpand)="onNodeExpand($event)"
+    [scrollable]="true"
+    styleClass="p-datatable-striped"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex flex-wrap gap-3">
+        <p-button
+          label="{{ 'Work::Add' | abpLocalization }}"
+          type="button"
+          icon="pi pi-plus"
+          styleClass="p-button-sm"
+          (click)="showAddModal()"
+        ></p-button>
+
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            [(ngModel)]="filter.keyword"
+            pInputText
+            type="text"
+            (keyup.enter)="loadData()"
+            placeholder="{{ 'Work::Search' | abpLocalization }}"
+          />
+        </span>
+
+        <span>
+          <p-dropdown
+            [options]="catPriority"
+            [(ngModel)]="filter.priority"
+            (onChange)="loadData()"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="{{ 'Work::Category:Priority' | abpLocalization }}"
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+            appendTo="body"
+            inputId="float-label"
+            [autoDisplayFirst]="false"
+          ></p-dropdown>
+        </span>
+
+        <span>
+          <p-dropdown
+            [options]="projectOptions"
+            [(ngModel)]="filter.projectId"
+            (onChange)="loadData()"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="{{ 'Work::InProject' | abpLocalization }}"
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+            appendTo="body"
+            inputId="float-label"
+            [autoDisplayFirst]="false"
+            [filter]="true"
+            filterBy="label"
+          ></p-dropdown>
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <!-- <th>{{ 'Work::RowCount' | abpLocalization }}</th> -->
+        <th style="width: 250px">{{ 'Work::WorkCode' | abpLocalization }}</th>
+        <th style="width: 300px">{{ 'Work::WorkNamee' | abpLocalization }}</th>
+        <th style="width: 140px">{{ 'Work::Category:Priority' | abpLocalization }}</th>
+        <th style="width: 140px">{{ 'Work::DueDate' | abpLocalization }}</th>
+        <th style="width: 140px">{{ 'Work::StartDate' | abpLocalization }}</th>
+        <th style="width: 200px">{{ 'Work::Project' | abpLocalization }}</th>
+        <th style="width: 80px"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+      <tr [ttRow]="rowNode">
+        <td style="width: 250px">
+          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+          {{ rowData.workCode }}
+        </td>
+        <td style="width: 300px">{{ rowData.name }}</td>
+        <td style="width: 140px">
+          <ng-container [ngSwitch]="rowData.priority">
+            <p-tag *ngSwitchCase="1" severity="success" [value]="getPriorityName(1)"></p-tag>
+            <p-tag *ngSwitchCase="2" severity="warning" [value]="getPriorityName(2)"></p-tag>
+            <p-tag *ngSwitchCase="3" severity="danger" [value]="getPriorityName(3)"></p-tag>
+          </ng-container>
+        </td>
+        <td style="width: 140px">{{ rowData.dueDate | date : 'dd/MM/YYYY' }}</td>
+        <td style="width: 140px">{{ rowData.startDate | date : 'dd/MM/YYYY' }}</td>
+        <td style="width: 200px">{{ rowData.projectName }}</td>
+        <td style="width: 80px">
+          <!-- <div class="p-link" (click)="handOverWork()">
+            <i class="pi pi-gift mr-2"></i>
+            <span>{{ 'Work::WorkList.handOver' | abpLocalization }}</span>
+          </div> -->
+          <cs-tieredMenu
+            (buttonItem)="dropdownItemsButton(rowData)"
+            [items]="actionItems"
+          ></cs-tieredMenu>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+      <p-paginator
+        [rows]="maxResultCount"
+        [totalRecords]="totalCount"
+        [showCurrentPageReport]="true"
+        [showJumpToPageInput]="true"
+        (onPageChange)="pageChanged($event)"
+        currentPageReportTemplate="{totalRecords} {{ 'AbpIdentity::Records' | abpLocalization }}"
+        [rowsPerPageOptions]="[10, 20, 50, 100]"
+      ></p-paginator>
+    </ng-template>
+  </p-treeTable>
+</div>
+
+<ng-container *ngIf="displayWorkAdd">
+  <app-work-add
+    [parentWork]="selectedItem"
+    [displayWorkAdd]="displayWorkAdd"
+    [catPriority]="catPriority"
+    (submitWorkAdd)="submitWorkAdd($event)"
+    (closeWorkAdd)="closeWorkAdd($event)"
+  ></app-work-add>
+</ng-container>
+
+<ng-container *ngIf="displayWorkViewMaster">
+  <app-work-master-view
+    [work]="selectedItem"
+    [catPriority]="catPriority"
+    [displayWorkViewMaster]="displayWorkViewMaster"
+    (submitWorkUpdate)="submitWorkUpdate($event)"
+    (closeWorkViewMaster)="closeWorkViewMaster($event)"
+  ></app-work-master-view>
+</ng-container>
+
+<ng-container *ngIf="displayHandOverWork">
+  <app-work-hand-over
+    header="{{ 'HandOverWork' | abpLocalization }}"
+    [displayHandOverWork]="displayHandOverWork"
+    [workListData]="workListData"
+    (closehandOverWork)="closehandOverWork($event)"
+  ></app-work-hand-over>
+</ng-container>

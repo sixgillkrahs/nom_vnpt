@@ -1,0 +1,56 @@
+<div class="card">
+  <p-treeTable [value]="menus" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+    <ng-template pTemplate="caption">
+      <div class="flex flex-wrap gap-2 justify-content-between">
+        <p-button label="{{'Work::Menu:New' | abpLocalization}}" icon="pi pi-plus" styleClass="p-button-sm" (click)="showAddModal(null)"></p-button>
+
+        <p-dropdown [options]="clientIds" [(ngModel)]="clientId" (onChange)="changeClient()"></p-dropdown>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Label</th>
+        <th>{{ 'Work::Icon' | abpLocalization}}</th>
+        <th>{{ 'Work::Action' | abpLocalization}}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+      <tr [ttRow]="rowNode">
+        <td>
+          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+          {{ rowData.label | abpLocalization }}
+        </td>
+        <td>{{ rowData.iconClass }} <i [class]="rowData.iconClass"></i></td>
+        <td>
+          <span class="p-buttonset">
+            <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-plus" pTooltip="{{'Work::Menu:Sub.New' | abpLocalization}}" (click)="showAddModal(rowData)" *ngIf="rowData.isGroup"></button>
+            <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-pencil" pTooltip="{{'Work::Edit' | abpLocalization}}" (click)="showEditModal(rowData)"></button>
+            <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-trash" pTooltip="{{'Work::Delete' | abpLocalization}}" (click)="deleteMenu(rowData)"></button>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
+</div>
+
+<ng-container *ngIf="isvisibleAdd">
+  <app-add-menu
+    [display]="isvisibleAdd"
+    [menuData]="menuData"
+    (appClose)="isvisibleAdd = false"
+    [isLoading]="isLoading"
+    (appSubmit)="addMenu($event)"
+  ></app-add-menu>
+</ng-container>
+
+
+<ng-container *ngIf="isvisibleUpdate">
+  <app-update-menu
+    [display]="isvisibleUpdate"
+    [menuData]="menuData"
+    (appClose)="isvisibleUpdate = false"
+    [isLoading]="isLoading"
+    (appSubmit)="updateMenu($event)"
+  ></app-update-menu>
+</ng-container>
+

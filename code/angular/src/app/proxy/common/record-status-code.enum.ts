@@ -1,0 +1,35 @@
+import { mapEnumToOptions } from '@ctincsp/ng.core';
+
+export enum RecordStatusCode {
+  active = 1,
+  drap = 4,
+  New = 5,
+  update = 6,
+  changed = 7,
+  revert = 8,
+  recovery = 9,
+  reject = 11,
+  adjust = 30,
+  rejectApproved = 34,
+  queueApproved = 35,
+  approvering = 39,
+  approved = 40,
+  printed = 45,
+  queueProgress = 55,
+  progressing = 59,
+  progressed = 60,
+  queuePublic = 75,
+  publicing = 79,
+  publiced = 80,
+  migrating = 88,
+  migrated = 89,
+  done = 100,
+  close = 101,
+  complete = 102,
+  overDue = 103,
+  oneAvailable = 106,
+  delete = -2,
+  deactive = -1,
+}
+
+export const recordStatusCodeOptions = mapEnumToOptions(RecordStatusCode);

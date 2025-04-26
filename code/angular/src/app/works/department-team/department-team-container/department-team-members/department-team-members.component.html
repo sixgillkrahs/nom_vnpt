@@ -1,0 +1,52 @@
+<div class="grid">
+  <div class="col-12 lg:col-6">
+    <p-table [value]="members">
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            Members
+            <p-button label="Add" styleClass="p-button-sm p-button-info" (click)="showModal()"></p-button>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+              <th>User</th>
+              <th>Role</th>
+              <th>#</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-member let-rowIndex="rowIndex">
+          <tr>
+              <td>{{ member.user }}</td>
+              <td>{{ member.role }}</td>
+              <td>:</td>
+          </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="col-12 lg:col-6">
+    <p-table [value]="teams">
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            Teams
+            <p-button label="Add" styleClass="p-button-sm p-button-info" (click)="showModal()"></p-button>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+              <th>Team</th>
+              <th>Role</th>
+              <th>#</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-t let-rowIndex="rowIndex">
+          <tr>
+              <td>{{ t.team }}</td>
+              <td>{{ t.role }}</td>
+              <td>:</td>
+          </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+

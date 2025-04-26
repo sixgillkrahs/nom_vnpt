@@ -1,0 +1,44 @@
+<!-- <p-progressSpinner *ngIf="isLoading" class="loading-spinner"></p-progressSpinner> -->
+<div >
+  <p-dialog header="{{ departmentTeamDetailData.header | abpLocalization }}"
+    [(visible)]="displayApproval" [modal]="true" [style]="{ width: '70%', height:'90%'}"
+    [draggable]="false" [resizable]="false" (onHide)="closeContainer.emit(false)" [responsive]="true">
+    <form [formGroup]="formGroup">
+      <div >
+        <h5>Phê duyệt công việc</h5>
+        <p-listbox [options]="selectedUser" [(ngModel)]="selectedUser" [metaKeySelection]="false" [checkbox]="false" [filter]="true" [multiple]="false" optionLabel="userName" [listStyle]="{'max-height':'250px'}" (onChange)="onUserChange($event)">
+          <ng-template let-selectedUser pTemplate="item">
+            <div class="selectedUser-item">
+              <div>{{selectedUser.userName}}</div>
+            </div>
+          </ng-template>
+        </p-listbox>
+
+        <div *ngIf="selectedUserName" style="padding-top: 5px;">
+          <h5>Phê duyệt công việc bước 1 : {{ selectedUserName.userName }}</h5>
+        </div>
+      </div>
+
+      <div>
+        <p-checkbox [binary]="true" inputId="binary" name="groupname" value="showSecondListbox" [(ngModel)]="showSecondListbox" (onChange)="onShowListbox2($event)"></p-checkbox>
+        <label for="ny" style="padding-left: 5px;">Phê duyệt bước 2</label>
+      </div>
+      <div *ngIf="showSecondListbox">
+        <p-listbox [options]="selectedUser" [(ngModel)]="selectedUser" [metaKeySelection]="false" [checkbox]="false" [filter]="true" [multiple]="false" optionLabel="userName" [listStyle]="{'max-height':'250px'}" (onChange)="onUser2Change($event)" >
+          <ng-template let-selectedUser pTemplate="item">
+            <div class="selectedUser-item">
+              <div>{{selectedUser.userName}}</div>
+            </div>
+          </ng-template>
+        </p-listbox>
+        <div *ngIf="selectedUserName2" style="padding-top: 5px;">
+          <h5>Phê duyệt công việc 2 bước : {{ selectedUserName2.userName }}</h5>
+        </div>
+      </div>
+    </form>
+    <ng-template pTemplate="footer">
+      <p-button label="{{ 'Work::Cancel' | abpLocalization}}"  styleClass="p-button-sm p-button-danger p-button-outlined"></p-button>
+      <p-button label="Phê duyệt" styleClass="p-button-sm p-button-info" [loading]="isLoading"></p-button>
+    </ng-template>
+  </p-dialog>
+</div>

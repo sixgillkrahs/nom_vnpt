@@ -1,0 +1,136 @@
+<div class="card">
+
+  <p-table [value]="projects" styleClass="p-datatable-striped" dataKey="code" [(selection)]="selectedProjects">
+
+    <ng-template pTemplate="caption">
+      <div class="flex gap-3">
+        <p-button label="{{ 'Work::Pm:Project.New' | abpLocalization }}" icon="pi pi-plus" styleClass="p-button-sm"
+          (click)="showModal()"></p-button>
+
+        <p-button label="{{ 'Work::Delete' | abpLocalization }}" icon="pi pi-trash"
+          styleClass="p-button-sm p-button-danger" [disabled]="!selectedProjects || !selectedProjects.length"
+          (click)="deleteSelectedProducts()"></p-button>
+
+        <ng-container>
+          <p-button icon="pi pi-sync" styleClass="p-button-sm p-button-secondary p-button-outlined"
+            (click)="sync.toggle($event)" pTooltip="{{'Work::Pm:Project.Sync' | abpLocalization}}"></p-button>
+          <p-overlayPanel #sync>
+            <div class="p-inputgroup" style="width: auto;">
+              <input type="text" pInputText placeholder="{{ 'Work::Pm:Project.Code' | abpLocalization }}"
+                [(ngModel)]="pmsProjectCode" />
+              <button type="button" pButton label="{{ 'Work::Pm:Project.Sync' | abpLocalization }}"
+                styleClass="p-button-sm p-button-info" (click)="syncProject()" [loading]="isSyncing"></button>
+            </div>
+          </p-overlayPanel>
+        </ng-container>
+
+        <ng-container [ngTemplateOutlet]="searchInput" *ngIf="mediumSide"></ng-container>
+
+        <ng-template #searchInput>
+          <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" [(ngModel)]="keyword" (keyup.enter)="getProject()"
+              placeholder="{{'Work::Search' | abpLocalization}}" />
+          </span>
+        </ng-template>
+
+        <ng-container>
+          <div [class]="!mediumSide ? 'ml-auto' : ''">
+            <p-button icon="pi pi-filter" styleClass="p-button-sm p-button-secondary p-button-outlined"
+              (click)="op.toggle($event)" pTooltip="{{'Work::Filter' | abpLocalization}}"></p-button>
+          </div>
+          <p-overlayPanel #op>
+
+            <div class="p-fluid grid w-25rem pt-2">
+
+              <div class="p-field col-12" *ngIf="smallSide">
+                <ng-container [ngTemplateOutlet]="searchInput"></ng-container>
+              </div>
+
+              <div class="p-field col-12">
+                <span class="p-float-label">
+                  <p-dropdown [options]="stateOptions" name="state" optionLabel="name" [autoDisplayFirst]="false"
+                    [showClear]="true" placeholder="{{'Work::Pm:Project.State' | abpLocalization}}"></p-dropdown>
+                  <label>{{'Work::Pm:Project.State' | abpLocalization}}</label>
+                </span>
+              </div>
+
+              <div class="p-field col-12">
+                <span class="p-float-label">
+                  <p-dropdown [options]="cities" name="status" [(ngModel)]="selectedCity" optionLabel="name"
+                    [showClear]="true" placeholder="{{'Work::Status' | abpLocalization}}"></p-dropdown>
+                  <label>{{'Work::Status' | abpLocalization}}</label>
+                </span>
+              </div>
+
+              <div class="p-field col-12">
+                <span class="p-float-label">
+                  <p-calendar [(ngModel)]="startDate" name="startDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [showButtonBar]="true" dateFormat="dd/mm/yy"></p-calendar>
+                  <label>{{'Work::StartDate' | abpLocalization}}</label>
+                </span>
+              </div>
+
+              <div class="p-field col-12">
+                <span class="p-float-label">
+                  <p-calendar [(ngModel)]="endDate" name="endDate" [iconDisplay]="'input'" [showIcon]="true"
+                    [showButtonBar]="true" dateFormat="dd/mm/yy"></p-calendar>
+                  <label>{{'Work::EndDate' | abpLocalization}}</label>
+                </span>
+              </div>
+
+            </div>
+
+          </p-overlayPanel>
+        </ng-container>
+
+      </div>
+    </ng-template>
+    
+    <ng-template pTemplate="header">
+      <tr>
+        <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+        <th>{{'Work::Pm:Display.Project.Code' | abpLocalization}}</th>
+        <th style="min-width: 280px;">{{'Work::Pm:Display.Project.Name' | abpLocalization}}</th>
+        <th style="min-width: 230px;">{{'Work::Pm:Display.Department' | abpLocalization}}</th>
+        <th style="min-width: 180px;">{{'Work::Pm:Display.Project.State' | abpLocalization}}</th>
+        <th style="min-width: 100px;">{{'Work::Progress' | abpLocalization}}</th>
+        <th>{{'Work::Status' | abpLocalization}}</th>
+        <th style="min-width: 50px;"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-project>
+      <tr>
+        <td><p-tableCheckbox [value]="project"></p-tableCheckbox></td>
+        <td>{{ project.code }}</td>
+        <td style="min-width: 280px;">{{ project.name }}</td>
+        <td style="min-width: 230px;">{{ project.department?.displayName }}</td>
+        <td style="min-width: 180px;">{{ project.projectState?.name }}</td>
+        <td style="min-width: 100px;"><p-progressBar [value]="project.progress"></p-progressBar></td>
+        <td><p-checkbox name="group" [value]="project" [(ngModel)]="selectedProject" [inputId]="project.code"
+            [disabled]="true"></p-checkbox></td>
+        <td style="min-width: 50px;">
+          <cs-tieredMenu (buttonItem)="dropdownItemsButton(project)" [items]="actionItems"></cs-tieredMenu>
+
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <p-paginator [rows]="maxResultCount" [totalRecords]="totalCount" [showCurrentPageReport]="true"
+        [showJumpToPageInput]="true" (onPageChange)="onPageChange($event)"
+        currentPageReportTemplate="{totalRecords} {{ 'AbpIdentity::Records' | abpLocalization }}"
+        [rowsPerPageOptions]="[10, 20, 50, 100]"></p-paginator>
+    </ng-template>
+  </p-table>
+
+</div>
+
+<ng-container *ngIf="displayProjectContainer">
+  <app-project-container [displayProjectContainer]="displayProjectContainer" [projectDetailData]="projectDetailData"
+    (closeProjectContainer)="closeProjectContainer($event)"></app-project-container>
+</ng-container>
+
+<ng-container *ngIf="displayProjectDetail">
+  <app-project-detail [displayProjectDetail]="displayProjectDetail" [projectDetailData]="projectDetailData"
+    (closeProjectDetail)="closeProjectDetail($event)"></app-project-detail>
+</ng-container>

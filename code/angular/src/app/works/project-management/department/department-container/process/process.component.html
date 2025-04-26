@@ -1,0 +1,43 @@
+<p-table [value]="process" styleClass="p-datatable-striped"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex gap-3">
+          <p-button label="Add" styleClass="p-button-sm p-button-info" (click)="showAddDepartment()"></p-button>
+
+          <span class="p-input-icon-left ml-auto">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" class="w-20rem" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+          </span>
+
+          <p-dropdown [options]="cities" name="classify" [(ngModel)]="selectedCity" optionLabel="code" [showClear]="true" placeholder="Phân loại" styleClass="w-11rem"></p-dropdown>
+
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="name">Tên <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="classify">Phân loại <p-sortIcon field="classify"></p-sortIcon></th>
+            <th>Mặc định</th>
+            <th pSortableColumn="status">Trạng thái <p-sortIcon field="status"></p-sortIcon></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pc>
+        <tr>
+            <td>{{ pc.name }}</td>
+            <td>{{ pc.classify }}</td>
+            <td><p-checkbox name="group" [value]="pc" [(ngModel)]="selectedProcess" [inputId]="pc.name" [disabled]="true"></p-checkbox></td>
+            <td>{{ pc.status === true ? "Active" : "Deactive" }}</td>
+            <td>
+              <span class="p-buttonset">
+                <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-eye" pTooltip="Xem" (click)="onView()"></button>
+                <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-pencil" pTooltip="Sửa"></button>
+                <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-trash" pTooltip="Xóa"></button>
+              </span>
+            </td>
+        </tr>
+    </ng-template>
+  </p-table>

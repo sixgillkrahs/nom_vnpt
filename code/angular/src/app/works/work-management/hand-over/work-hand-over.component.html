@@ -1,0 +1,93 @@
+<p-dialog
+  header="Bàn giao công việc"
+  [(visible)]="displayHandOverWork"
+  [style]="{ width: '1200px' }"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closehandOverWork.emit(false)"
+>
+
+  <p-tabView>
+    <p-tabPanel header="Của tôi">
+      <div class="flex">
+        <div class="flex-1">
+
+          <!-- Người bàn giao -->
+          <div class="flex gap-2 align-items-center text-primary-500 pt-3">
+            <i class="pi pi-user font-semibold"></i>
+            <span>Người bàn giao:</span>
+            <span class="font-semibold">{{currentUser.surName}} {{currentUser.name}} {{currentUser.surName || currentUser.name ? '-' : ''}} {{currentUser.userName}}</span>
+            <!-- <span class="pi pi-pencil cursor-pointer"></span> -->
+          </div>
+
+          <!-- Vai trò / Trạng thái công việc -->
+          <div class="flex flex-wrap gap-7 pt-3">
+            <div>
+              <div class="font-semibold mb-3">Vai trò trong công việc</div>
+              <div *ngFor="let category of categories" class="field-checkbox">
+                <p-checkbox [label]="category.name" name="group" [value]="category" [(ngModel)]="selectedCategories"></p-checkbox>
+              </div>
+            </div>
+            <div>
+              <div class="font-semibold mb-3">Trạng thái công việc</div>
+              <div *ngFor="let st of status" class="field-checkbox">
+                <p-checkbox [label]="st.name" name="group" [value]="st" [(ngModel)]="selectedStatus"></p-checkbox>
+              </div>
+            </div>
+          </div>
+
+          <!-- Danh sách công việc bàn giao -->
+          <div class="pt-3">
+            <div class="font-semibold mb-3">Danh sách công việc bàn giao</div>
+              <p-tree [value]="delegateList" selectionMode="checkbox" class="w-full md:w-30rem" [(selection)]="selectedDelegate" (selectionChange)="selectionChange($event)"></p-tree>
+          </div>
+
+        </div>
+        <p-divider layout="vertical"></p-divider>
+
+        <!-- Người được bàn giao  -->
+        <div class="flex-1">
+
+          <div class="flex gap-2 align-items-center text-primary-500 pt-3">
+            <i class="pi pi-user font-semibold"></i>
+            <span>Người được bàn giao:</span>
+            <span [style]="{'width' : '20rem'}">
+              <form [formGroup]="form">
+                <abp-user-select
+                  formControlName="assigner"
+                ></abp-user-select>
+              </form>
+            </span>
+          </div>
+
+          <!-- Danh sách công việc được bàn giao -->
+          <div class="pt-3">
+            <div class="font-semibold mb-3">Danh sách công việc được bàn giao</div>
+              <p-tree [value]="delegateList" selectionMode="checkbox" class="w-full md:w-30rem" [(selection)]="selectedDelegate"></p-tree>
+          </div>
+
+
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Của người khác">
+        <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
+            ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
+        </p>
+    </p-tabPanel>
+  </p-tabView>
+
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-between gap-1">
+      <p-button label="{{ 'Work::Reset' | abpLocalization}}" styleClass="p-button-sm p-button-plain p-button-text"></p-button>
+      <span>
+        <p-button label="{{ 'Work::Cancel' | abpLocalization}}" (click)="closehandOverWork.emit(false)" styleClass="p-button-sm p-button-plain p-button-text"></p-button>
+        <p-button label="{{ 'Work::Save' | abpLocalization }}" (click)="save()" styleClass="p-button-sm" [loading]="isLoading"></p-button>
+      </span>
+    </div>
+  </ng-template>
+</p-dialog>
+

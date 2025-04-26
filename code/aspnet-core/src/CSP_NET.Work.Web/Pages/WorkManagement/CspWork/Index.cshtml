@@ -1,0 +1,57 @@
+@page
+@using CSP_NET.Work.Permissions
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using CTIN.Abp.AspNetCore.Mvc.UI.Layout
+@using CSP_NET.Work.Web.Pages.WorkManagement.CspWork
+@using CSP_NET.Work.Localization
+@using CSP_NET.Work.Web.Menus
+@model IndexModel
+@inject IPageLayout PageLayout
+@inject IHtmlLocalizer<WorkResource> L
+@inject IAuthorizationService Authorization
+@{
+    PageLayout.Content.Title = L["CspWork"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:CspWork"].Value);
+    PageLayout.Content.MenuItemName = WorkMenus.CspWork;
+}
+
+@section scripts
+{
+    <abp-script src="/Pages/WorkManagement/CspWork/index.js" />
+}
+@section styles
+{
+    <abp-style src="/Pages/WorkManagement/CspWork/index.css"/>
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["CspWork"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+			    @if (await Authorization.IsGrantedAsync(WorkPermissions.CspWork.Create))
+                {
+                <abp-button id="NewCspWorkButton"
+                            text="@L["CreateCspWork"].Value"
+                            icon="plus"
+                            button-type="Primary" />
+                }
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row class="mb-3">
+            <a abp-collapse-id="CspWorkCollapse" class="text-secondary">@L["TableFilter"] </a>
+        </abp-row>
+        <abp-dynamic-form abp-model="CspWorkFilter" id="CspWorkFilter" required-symbols="false" column-size="_3">
+            <abp-collapse-body id="CspWorkCollapse">
+                <abp-form-content />
+            </abp-collapse-body>
+        </abp-dynamic-form>
+        <hr />
+        <abp-table striped-rows="true" id="CspWorkTable" class="nowrap"/>
+    </abp-card-body>
+</abp-card>

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\common.props" />
+	<Import Project="..\..\configureawait.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<RootNamespace>CSP_NET.Work</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CSP_NET.Work.Application.Contracts\CSP_NET.Work.Application.Contracts.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CSP.NotificationConfig.HttpApi" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Account.HttpApi" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Identity.HttpApi" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.PermissionManagement.HttpApi" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.TenantManagement.HttpApi" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.FeatureManagement.HttpApi" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.SettingManagement.HttpApi" Version="0.3.7" />
+		<PackageReference Include="CSP.Category.HttpApi" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.NotificationService.HttpApi" Version="0.3.7" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,126 @@
+{
+  "culture": "vi",
+
+  "texts": {
+    "Menu:Home": "Trang chủ",
+    "Menu:New": "Nhóm menu mới",
+    "Menu:Sub.New": "Thêm menu phụ",
+    "Menu:Template": "Bản mẫu",
+
+    "User": "Người dùng",
+    "Role": "Vai trò",
+
+    "IsGroup": "Nhóm",
+
+    "Icon": "Biểu tượng",
+    "Order": "Thứ tự",
+    "RowCount": "STT",
+
+    "Save": "Lưu",
+    "Close": "Đóng",
+    "Cancel": "Hủy",
+    "Status": "Trạng thái",
+    "Progress": "Tiến độ",
+    "Description": "Mô tả",
+    "Approve": "Phê duyệt",
+    "Related": "Có liên quan",
+
+    "Search": "Tìm kiếm",
+    "Filter": "Lọc",
+
+    "Add": "Thêm",
+    "Edit": "Chỉnh sửa",
+    "Update": "Cập nhật",
+    "View": "Xem",
+    "Delete": "Xóa",
+    "Detail": "Chi tiết",
+
+    "StartDate": "Ngày bắt đầu",
+    "EndDate": "Ngày kết thúc",
+
+    "Dashboard": "Bàn làm việc",
+    "Db:Calendar": "Lịch",
+
+    "ProjectManagement": "Quản lý dự án",
+
+    "Pm:Department": "Quản lý phòng ban",
+    "Pm:Project": "Quản lý dự án",
+    "Pm:Project.New": "Dự án mới",
+    "Pm:Project.Sync": "Đồng bộ dự án",
+    "Pm:Project.Detail": "Chi tiết",
+    "Pm:Project.State": "Giai đoạn",
+    "Pm:Project.Process": "Quy trình",
+    "Pm:Project.Work.Template": "Mẫu công việc",
+    "Pm:Project.Members": "Thành viên",
+    "Pm:Project.Works": "Công việc",
+    "Pm:Project.Code": "Mã dự án",
+    "Pm:Project.Detail.Alias": "Tên giai đoạn",
+
+    "Pm:Display.Department": "Phòng ban",
+    "Pm:Display.Project.Code": "Mã dự án",
+    "Pm:Display.Project.Name": "Tên dự án",
+    "Pm:Display.Project.State": "Giai đoạn dự án",
+
+    "Pm:Display.Description": "Mô tả",
+
+    "Pm:ProjectRole": "Vai trò dự án",
+    "Pm:ProjectRole.Code": "Mã vai trò",
+    "Pm:ProjectRole.Name": "Tên vai trò",
+    "Pm:ProjectRole.Domain": "Tên miền",
+    "Pm:ProjectRole.Status": "Trạng thái",
+    "Pm:ProjectRole.New": "Vai trò mới",
+    "Pm:Select.Domain": "Lựa chọn tên miền",
+    "Pm:Select.Status": "Lựa chọn trạng thái",
+
+    "Pm:ProjectState": "Giai đoạn dự án",
+    "Pm:ProjectState.Code": "Mã giai đoạn",
+    "Pm:ProjectState.Name": "Tên giai đoạn",
+    "Pm:ProjectState.Status": "Trạng thái",
+    "Pm:ProjectState.New": "Giai đoạn mới",
+
+    "WorkManager": "Quản lý công việc",
+    "WorkConfig": "Cấu hình công việc",
+
+    "WorkList": "Danh sách công việc",
+    "WorkNamee": "Tên công việc",
+    "WorkStatus": "Tình trạng công việc",
+    "DueDate": "Hạn hoàn thành",
+    "Performer": "Người thực hiện",
+    "Project": "Dự án",
+    "WorkList.Add": "Thêm công việc",
+    "HandOverWork": "Bàn giao công việc",
+
+    "WorkCode": "Mã công việc",
+    "TaskCode": "Mã đầu việc",
+    "InProject": "Thuộc dự án",
+    "Progess": "Mức độ hoàn thành",
+    "Level": "Cấp độ",
+    "Duration": "Thời gian thực hiện",
+    "RestrictComplete": "Điều kiện hoàn thành CV nghiêm ngặt",
+    "Assigner": "Người giao việc",
+    "Owner": "Người (Owner)",
+    "AddCheckList": "Thêm check list",
+    "AddChild": "Thêm CV con",
+    "WorkPlan": "Danh sách giao việc",
+    "Collaborator": "Người tham gia",
+    "AddCollaborator": "Thêm người tham gia",
+
+    "Message:Create.Ok": "Thêm mới thành công",
+    "Message:Create.NotOk": "Thêm mới không thành công",
+    "Message:Update.Ok": "Cập nhật thành công",
+    "Message:Update.NotOk": "Cập nhật không thành công",
+    "Message:Delete.Ok": "Xóa {0} thành công",
+    "Message:Delete.NotOk": "Xóa {0} không thành công",
+    "Message:Sync.Ok": "Đồng bộ {0} thành công",
+    "Message:Sync.NotOk": "Đồng bộ {0} không thành công",
+    "Message:Confirm.Delete": "{0} sẽ bị xóa. Bạn có xác nhận điều này không? ",
+    "Message:IsNotMatch": "{0} chứa các ký tự không hợp lệ",
+
+    "Category:Priority": "Độ ưu tiên",
+    "Category:Complexity": "Độ phức tạp",
+    "Category:DegreeOfImportant": "Mức độ quan trọng",
+    "ParentWorkCode": "Mã CV cha",
+    "ParentWorkName": "Tên CV cha"
+
+  }
+}

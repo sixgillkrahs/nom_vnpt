@@ -1,0 +1,77 @@
+<!-- <p-progressSpinner *ngIf="isLoading" class="loading-spinner"></p-progressSpinner> -->
+<div *ngIf="!isLoading">
+  <p-dialog header="{{ departmentTeamDetailData.header | abpLocalization }}"
+    [(visible)]="displayDepartmentTeamContainer" [modal]="true" [style]="{ width: '70%', height:'70%'}"
+    [draggable]="false" [resizable]="false" (onHide)="closeContainer.emit(false)" [responsive]="true">
+    <form [formGroup]="formGroup">
+
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Input name và code -->
+          <div class="form-group">
+            <label for="name">Tên: <span class="required">*</span></label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+
+            <!-- Hiển thị cảnh báo nếu trường 'name' không được nhập -->
+            <div *ngIf="f.name.hasError('required') && (f.name.dirty || f.name.touched)">
+              <span class="required">Không được bỏ trống</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="code">Mã: <span class="required">*</span></label>
+            <!-- <input type="text" class="form-control" id="code" [(ngModel)]="newDepartmentTeam.code"> -->
+            <input type="text" class="form-control" id="code" formControlName="code" />
+            <!-- Hiển thị cảnh báo nếu trường 'name' không được nhập -->
+            <div *ngIf="f.code.hasError('required') && (f.code.dirty || f.code.touched)">
+              <span class="required">Không được bỏ trống</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="department">Phòng ban: <span class="required">*</span></label>
+        <p-dropdown id="organizationLookup" class="form-control" [options]="organizationLookupData"
+          formControlName="departmentID" optionLabel="displayName" optionValue="id"
+          placeholder="Chọn phòng ban"></p-dropdown>
+        <!-- Hiển thị cảnh báo nếu trường 'departmentID' không được chọn -->
+        <div *ngIf="f.departmentID.hasError('required') && (f.departmentID.dirty || f.departmentID.touched)">
+          <span class="required">Chọn phòng ban</span>
+        </div>
+      </div>
+
+      <!-- Input Description -->
+      <div class="form-group">
+        <label for="description">Mô tả:</label>
+        <textarea class="form-control" id="description" formControlName="description"></textarea>
+      </div>
+      <!-- Button thêm mới -->
+      <!-- Component HTML Template -->
+      <div class="picklist-container" style="padding-top: 10px;">
+        <p-pickList filterBy="userName" sourceFilterPlaceholder="Tìm kiếm" targetFilterPlaceholder="Tìm kiếm"
+          [source]="selectedUser" [target]="targetUsers" [sourceHeader]="'Tất cả người dùng'" [targetHeader]="'Người dùng thuộc team'"
+          (onMoveToTarget)="onMoveToTarget($event)" (onMoveToSource)="onMoveToSource($event)"
+          [(ngModel)]="selectedUsers" [responsive]="true" (ngModelChange)="onSelectedUsersChange($event)">
+          <ng-template let-item pTemplate="item">
+            {{ item.userName }} <!-- Hiển thị tên user -->
+          </ng-template>
+        </p-pickList>
+      </div>
+      <!-- end -->
+
+    </form>
+
+    <ng-template pTemplate="footer">
+      <p-button label="{{ 'Work::Cancel' | abpLocalization}}" (click)="closeContainer.emit(false)" styleClass="p-button-sm p-button-danger p-button-outlined"></p-button>
+      <p-button label="{{ 'Work::Save' | abpLocalization }}" (click)="createDepartmentTeam()" styleClass="p-button-sm p-button-info" [loading]="isLoading"></p-button>
+      <!-- <p-button label="Lưu" icon="pi pi-check" styleClass="p-button-sm p-button-info"
+        (click)="createDepartmentTeam()"></p-button> -->
+      <!-- <p-button (click)="closeContainer.emit()" label="Hủy" icon="pi pi-times"
+        styleClass="p-button-sm p-button-secondary p-button-outlined"></p-button> -->
+
+    </ng-template>
+
+  </p-dialog>
+</div>

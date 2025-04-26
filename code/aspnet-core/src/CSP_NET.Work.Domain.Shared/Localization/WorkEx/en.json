@@ -1,0 +1,9 @@
+{
+  "culture": "en",
+  "texts": {
+    "GeneralProject.00001": "Not find project with code {code} from Pms",
+    "GeneralProject.00002": "Project {code} has been synchronized before",
+    "WorkEx:00001": "Work code '{code}' already existed!",
+    "WorkEx:00002": "Work name '{name}' already existed!"
+  }
+}

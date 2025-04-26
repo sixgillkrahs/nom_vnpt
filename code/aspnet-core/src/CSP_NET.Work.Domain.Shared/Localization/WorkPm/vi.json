@@ -1,0 +1,12 @@
+{
+  "culture": "vi",
+  "texts": {
+    "Permission:Create": "Tạo",
+    "Permission:Update": "Cập nhật",
+    "Permission:Delete": "Xóa",
+    "Permission:ProjectGeneral": "Quản lý dự án",
+    "Permission:DepartmentTeam": "Department Team",
+    "Permission:ProjectState": "Quản lý giai đoạn dự án",
+    "Permission:CspWork": "Quản lý công việc"
+  }
+}

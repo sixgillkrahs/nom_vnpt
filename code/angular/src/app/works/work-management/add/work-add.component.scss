@@ -1,0 +1,15 @@
+::ng-deep .p-checkbox .p-checkbox-box {
+  border-radius: 6px;
+}
+
+.cs-input{
+  border: none;
+  border-bottom: 1px solid #ddd;
+  &:focus-visible {
+    outline: none ;
+}
+}
+
+:host ::ng-deep .p-inputnumber-input{
+  width: 70px;
+}

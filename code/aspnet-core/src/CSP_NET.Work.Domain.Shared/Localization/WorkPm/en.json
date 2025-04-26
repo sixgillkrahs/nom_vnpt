@@ -1,0 +1,12 @@
+{
+  "culture": "en",
+  "texts": {
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
+    "Permission:ProjectGeneral": "Project General",
+    "Permission:DepartmentTeam": "Department Team",
+    "Permission:ProjectState": "Project State",
+    "Permission:CspWork": "Work Management"
+  }
+}

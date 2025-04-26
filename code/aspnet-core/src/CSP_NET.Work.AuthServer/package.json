@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "name": "my-app-authserver",
+  "private": true,
+  "dependencies": {
+    "@ctincsp/aspnetcore.mvc.ui.theme.basic": "~0.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  }
+}

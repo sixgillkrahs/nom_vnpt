@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>CSP_NET.Work</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CSP_NET.Work.EntityFrameworkCore\CSP_NET.Work.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\CSP_NET.Work.TestBase\CSP_NET.Work.TestBase.csproj" />
+    <PackageReference Include="CTIN.Abp.EntityFrameworkCore.Sqlite" Version="0.3.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+  </ItemGroup>
+
+</Project>

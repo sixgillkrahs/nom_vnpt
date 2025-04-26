@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\common.props" />
+	<Import Project="..\..\configureawait.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<RootNamespace>CSP_NET.Work</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CSP_NET.Work.Domain\CSP_NET.Work.Domain.csproj" />
+		<ProjectReference Include="..\CSP_NET.Work.Application.Contracts\CSP_NET.Work.Application.Contracts.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CSP.NotificationConfig.Application" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Account.Application" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Identity.Application" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Json.Newtonsoft" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.PermissionManagement.Application" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.TenantManagement.Application" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.FeatureManagement.Application" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.SettingManagement.Application" Version="0.3.7" />
+		<PackageReference Include="CSP.Category.Application" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.NotificationService.Application" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.BackgroundWorkers.Hangfire" Version="0.3.7" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+	</ItemGroup>
+
+</Project>

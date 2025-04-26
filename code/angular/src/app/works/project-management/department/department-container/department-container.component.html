@@ -1,0 +1,48 @@
+<p-dialog
+  header="{{ departmentDetailData.header | abpLocalization }}"
+  [(visible)]="displayDepartment"
+  [modal]="true"
+  [style]="{ width: '70%', height: '100%' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeDepartmentDetail.emit(false)"
+>
+
+  <p-tabView>
+    <p-tabPanel header="Project">
+      <app-department-detail></app-department-detail>
+    </p-tabPanel>
+
+    <!-- <p-tabPanel header="Process">
+      <ng-template pTemplate="content">
+          <app-process></app-process>
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel header="Work Template">
+      <ng-template pTemplate="content">
+        <app-work-template></app-work-template>
+      </ng-template>
+    </p-tabPanel> -->
+
+    <p-tabPanel header="Members">
+      <ng-template pTemplate="content">
+        <app-members></app-members>
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel header="Teams">
+        <ng-template pTemplate="content">
+          <app-teams></app-teams>
+        </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel header="Works">
+      <ng-template pTemplate="content">
+        <app-works></app-works>
+      </ng-template>
+    </p-tabPanel>
+
+  </p-tabView>
+
+</p-dialog>

@@ -1,0 +1,55 @@
+<div class="card">
+  <p-table [value]="departments" styleClass="p-datatable-striped"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex gap-3">
+          <p-button label="Add" styleClass="p-button-sm p-button-info" (click)="showAddDepartment()"></p-button>
+          <span class="p-input-icon-left ml-auto">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" class="w-20rem" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+          </span>
+          <p-dropdown [options]="cities" styleClass="w-12rem" [(ngModel)]="selectedCity" optionLabel="name" [showClear]="true" placeholder="Select a Block"></p-dropdown>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Block</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-department>
+        <tr>
+            <td>{{ department.code }}</td>
+            <td>{{ department.name }}</td>
+            <td>{{ department.block }}</td>
+            <td><p-checkbox name="group" disa [value]="department" [(ngModel)]="selectedDepartment" [inputId]="department.code" [disabled]="true"></p-checkbox></td>
+            <td>
+              <span class="p-buttonset">
+                <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-eye" pTooltip="Xem" (click)="onView(department)"></button>
+                <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-pencil" pTooltip="Sửa"></button>
+                <button pButton pRipple class="p-button-sm p-button-text" icon="pi pi-trash" pTooltip="Xóa"></button>
+              </span>
+            </td>
+        </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-container *ngIf="displayAddDepartment">
+  <app-add-department [displayAddDepartment]="displayAddDepartment" (closeModal)="cancelModal($event)"></app-add-department>
+</ng-container>
+
+<ng-container *ngIf="displayDepartment">
+  <app-department-container
+    [displayDepartment]="displayDepartment"
+    [departmentDetailData]="departmentDetailData"
+    (closeDepartmentDetail)="closeDepartmentDetail($event)"
+  ></app-department-container>
+</ng-container>
+

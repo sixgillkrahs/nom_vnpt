@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\common.props" />
+	<Import Project="..\..\configureawait.props" />
+
+	
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<RootNamespace>CSP_NET.Work</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CSP_NET.Work.Domain.Shared\CSP_NET.Work.Domain.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CSP.NotificationConfig.Application.Contracts" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.ObjectExtending" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Account.Application.Contracts" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Identity.Application.Contracts" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.PermissionManagement.Application.Contracts" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.TenantManagement.Application.Contracts" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.FeatureManagement.Application.Contracts" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.SettingManagement.Application.Contracts" Version="0.3.7" />
+		<PackageReference Include="CSP.Category.Application.Contracts" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.NotificationService.Application.Contracts" Version="0.3.7" />
+	</ItemGroup>
+
+</Project>

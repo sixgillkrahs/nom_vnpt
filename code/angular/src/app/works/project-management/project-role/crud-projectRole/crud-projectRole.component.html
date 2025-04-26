@@ -1,0 +1,65 @@
+<p-dialog
+  header="{{ projectRoleData.header | abpLocalization }}"
+  [(visible)]="displayProjectRole"
+  [modal]="true"
+  [style]="{ width: '800px' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeProjectRole.emit(false)"
+>
+  <form [formGroup]="formGroup">
+
+    <div class="p-fluid grid pt-4">
+
+      <div class="p-field col-12 lg:col-6">
+        <span class="p-float-label">
+          <input pInputText type="text" formControlName="code"/>
+          <label>
+            {{ 'Work::Pm:ProjectRole.Code' | abpLocalization }}
+            <span class="required">*</span>
+          </label>
+        </span>
+        <app-render-error
+          [entityControl]="f.code"
+        ></app-render-error>
+      </div>
+
+      <div class="p-field col-12 lg:col-6">
+        <span class="p-float-label">
+          <input pInputText type="text" formControlName="name"/>
+          <label>
+            {{ 'Work::Pm:ProjectRole.Name' | abpLocalization }}
+            <span class="required">*</span>
+          </label>
+        </span>
+        <app-render-error
+          [entityControl]="f.name"
+        ></app-render-error>
+      </div>
+
+      <div class="p-field col-12 lg:col-6">
+        <span class="p-float-label">
+          <input pInputText type="text" formControlName="domain" />
+          <label>{{ 'Work::Pm:ProjectRole.Domain' | abpLocalization }}</label>
+          <app-render-error
+            [entityControl]="f.domain"
+          ></app-render-error>
+        </span>
+      </div>
+
+    </div>
+
+  </form>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-between gap-1">
+      <p-button label="{{ 'Work::Reset' | abpLocalization}}" styleClass="p-button-sm p-button-plain p-button-text"></p-button>
+      <span>
+        <p-button label="{{ 'Work::Cancel' | abpLocalization}}" (click)="closeProjectRole.emit(false)" styleClass="p-button-sm p-button-plain p-button-text"></p-button>
+        <p-button label="{{ 'Work::Save' | abpLocalization }}" (click)="save()" styleClass="p-button-sm" [loading]="isLoading"></p-button>
+      </span>
+    </div>
+  </ng-template>
+
+</p-dialog>
+

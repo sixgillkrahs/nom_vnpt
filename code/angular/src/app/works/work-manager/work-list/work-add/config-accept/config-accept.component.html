@@ -1,0 +1,50 @@
+<p-dialog
+  header="{{dataAssign?.header}}"
+  [(visible)]="displayUserAssign"
+  [style]="{ width : '800px'}"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+>
+
+<div class="pt-4 ">
+  <span class="p-input-icon-left w-full">
+    <i class="pi pi-search"></i>
+    <input pInputText type="text" class="w-full" placeholder="Search keyword" />
+  </span>
+</div>
+
+<div class="selected-user">
+
+  <ng-container *ngFor="let user of selectedUsers">
+    <div class="img-item pt-4">
+      <div class="clear" (click)="clearSelected(user)"><i class="pi pi-times"></i></div>
+      <img src="https://talenthub.vn/wp-content/uploads/2023/12/may-anh-cho-nguoi-moi.jpg" class="image-select" alt="">
+    </div>
+  </ng-container>
+
+</div>
+
+<div class="select-user flex flex-column gap-3 pt-4">
+
+  <ng-container *ngFor="let user of users">
+    <div class="select-item flex gap-3">
+      <div class="avatar">
+        <img src="https://talenthub.vn/wp-content/uploads/2023/12/may-anh-cho-nguoi-moi.jpg" class="image-select" alt="">
+      </div>
+      <div class="item flex flex-1 flex-column">
+        <p-checkbox [label]="user.name" name="group" [value]="user" [(ngModel)]="selectedUsers"></p-checkbox>
+        <div class="line-item"></div>
+      </div>
+    </div>
+  </ng-container>
+
+
+</div>
+
+
+<ng-template pTemplate="footer">
+    <p-button label="Thêm" styleClass="p-button-sm w-full" (click)="save()"></p-button>
+</ng-template>
+
+</p-dialog>

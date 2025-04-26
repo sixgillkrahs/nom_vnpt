@@ -1,0 +1,49 @@
+<p-table [value]="works" styleClass="p-datatable-striped"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+  >
+    <!-- <ng-template pTemplate="caption">
+      <div class="flex gap-3">
+          <p-button label="Add" styleClass="p-button-sm p-button-info" (click)="showAddDepartment()"></p-button>
+
+          <span class="p-input-icon-left ml-auto">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+          </span>
+
+          <p-dropdown [options]="cities" name="classify" [(ngModel)]="selectedCity" optionLabel="code" [showClear]="true" placeholder="Phân loại" styleClass="w-11rem"></p-dropdown>
+
+      </div>
+    </ng-template> -->
+    <ng-template pTemplate="header">
+        <tr>
+            <th>#</th>
+            <th>Tên công việc</th>
+            <th>Tình trạng công việc</th>
+            <th>Hạn hoàn thành</th>
+            <th>Người thực hiện</th>
+            <th>Dự án</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-work let-rowIndex="rowIndex">
+        <tr>
+            <td>{{ rowIndex+1 }}</td>
+            <td>{{ work.name }}</td>
+            <td>
+              <ng-container *ngIf="work.workStatus === true">
+                <p-tag severity="success" value="Hoàn thành"></p-tag>
+              </ng-container>
+              <ng-container *ngIf="work.workStatus === false">
+                <p-tag severity="warning" value="Đang xử lý"></p-tag>
+              </ng-container>
+            </td>
+            <td>{{ work.deadline }}</td>
+            <td>{{ work.user }}</td>
+            <td>{{ work.project }}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <p-button label="Thêm công việc" type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+  </ng-template>
+  </p-table>

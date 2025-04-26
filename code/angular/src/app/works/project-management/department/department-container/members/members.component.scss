@@ -1,0 +1,13 @@
+.members{
+  border-bottom: 1px solid #333;
+}
+
+:host ::ng-deep .p-image{
+  img{
+    border-radius: 12px;
+  }
+}
+
+._name{
+  color: #e24c4c;
+}

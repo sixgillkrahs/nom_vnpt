@@ -1,0 +1,64 @@
+$gutter: 1rem; //for primeflex grid system
+// @import 'assets/layout/styles/layout/layout.scss';
+@import '/node_modules/@ctincsp/ng.theme.sakai/src/themes/layout/layout.scss';
+
+/* PrimeNG */
+@import '../node_modules/primeng/resources/primeng.min.css';
+@import '../node_modules/primeflex/primeflex.scss';
+@import '../node_modules/primeicons/primeicons.css';
+
+.p-blockui {
+  z-index: 10000;
+}
+.p-multiselect {
+  width: 100%;
+}
+.p-dropdown {
+  width: 100%;
+}
+
+#inputPassword {
+  width: 100% !important;
+}
+
+@import './app/shared/scss/spinner.scss';
+
+.p-breadcrumb {
+  border: 1px solid #dfe7ef !important;
+  border-radius: 12px !important;
+}
+.required{
+  color: #e24c4c;
+}
+
+input[type="text"]:disabled {
+  background: #dddddd;
+}
+
+
+.p-button-loading-icon svg{
+  vertical-align: text-top !important;
+}
+
+.card-modal{
+  padding: 10px;
+  border: 1px solid var(--surface-border);
+  border-radius: 4px;
+  width: 100%;
+}
+
+.p-inputtext{
+  padding: 8px 0.75rem !important
+}
+
+.p-input-icon-left > .p-inputtext {
+  padding-left: 2.3rem !important;
+}
+
+.p-input-icon-left>i, .p-input-icon-left>.p-icon-wrapper, .p-input-icon-right>i, .p-input-icon-right>.p-icon-wrapper{
+  // margin-top: -10px;
+}
+
+.p-fluid .p-button.p-button-icon-only {
+  padding: 0 0 !important;
+}

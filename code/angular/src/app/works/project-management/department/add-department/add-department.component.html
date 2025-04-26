@@ -1,0 +1,42 @@
+<p-dialog header="New Department" [(visible)]="displayAddDepartment" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" (onHide)="closeModal.emit()">
+
+  <form [formGroup]="formGroup">
+    <div class="p-fluid grid pt-4">
+      <div class="p-field col-12 lg:col-6">
+        <span class="p-float-label">
+          <input type="text" pInputText formControlName="code"/>
+          <label>Code <span class="required">*</span></label>
+        </span>
+        <abp-render-errors
+          [entityControl]="f.code"
+        ></abp-render-errors>
+      </div>
+
+      <div class="p-field col-12 lg:col-6">
+        <span class="p-float-label">
+          <input type="text" pInputText formControlName="name"/>
+          <label>Name <span class="required">*</span></label>
+        </span>
+        <abp-render-errors
+          [entityControl]="f.name"
+        ></abp-render-errors>
+      </div>
+
+      <div class="p-field col-12">
+        <span class="p-float-label">
+          <p-treeSelect formControlName="block" placeholder="Select Item"></p-treeSelect>
+          <label>Block <span class="required">*</span></label>
+        </span>
+        <abp-render-errors
+          [entityControl]="f.block"
+        ></abp-render-errors>
+      </div>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <p-button label="Lưu" icon="pi pi-check" (click)="save()" styleClass="p-button-sm p-button-info" ></p-button>
+    <p-button label="Đóng" icon="pi pi-times" (click)="closeModal.emit()" styleClass="p-button-sm p-button-secondary p-button-outlined"></p-button>
+  </ng-template>
+
+</p-dialog>

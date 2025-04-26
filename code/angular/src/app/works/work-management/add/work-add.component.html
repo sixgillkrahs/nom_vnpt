@@ -1,0 +1,330 @@
+<p-dialog
+  header="{{ 'Work::WorkList.Add' | abpLocalization }}"
+  [(visible)]="displayWorkAdd"
+  [style]="{ width: '1200px' }"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeWorkAdd.emit()"
+>
+  <form [formGroup]="form">
+    <div class="flex gap-2 align-items-end flex-wrap">
+      <div class="flex-1">
+        <label class="mb-1 text-primary-500 font-semibold"
+          >{{ 'Work::Progess' | abpLocalization }}:
+        </label>
+        <p-progressBar
+          [value]="progress"
+          [style]="{ cursor: dragging ? 'ew-resize' : 'default' }"
+          (mousedown)="onMouseDown($event)"
+          (document:mousemove)="onMouseMove($event)"
+          (document:mouseup)="onMouseUp()"
+        >
+        </p-progressBar>
+        <abp-render-errors [entityControl]="formControls.progress"></abp-render-errors>
+      </div>
+
+      <div class="">
+        <p-inputNumber
+          inputId="integeronly"
+          formControlName="progress"
+          [min]="0"
+          [max]="100"
+          sufix="%"
+          [(ngModel)]="progress"
+        ></p-inputNumber>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="p-fluid grid pt-4">
+      <!-- CV cha -->
+      <ng-container *ngIf="parentWork">
+        <div class="p-field col-12 md:col-6">
+          <span class="p-float-label">
+            <input pInputText id="parentCode" [value]="parentWork?.workCode" readonly />
+            <label for="parentCode">
+              {{ 'Work::ParentWorkCode' | abpLocalization }}
+            </label>
+          </span>
+        </div>
+
+        <div class="p-field col-12 md:col-6">
+          <span class="p-float-label">
+            <input pInputText id="parentName" [value]="parentWork?.name" readonly />
+            <label for="parentCode">
+              {{ 'Work::ParentWorkName' | abpLocalization }}
+            </label>
+          </span>
+        </div>
+      </ng-container>
+
+      <!-- Mã công việc  -->
+      <div class="p-field col-12 md:col-6">
+        <span class="p-float-label">
+          <input pInputText id="workCode" formControlName="workCode" />
+          <label for="code">
+            {{ 'Work::WorkCode' | abpLocalization }}
+            <span class="required">*</span>
+          </label>
+        </span>
+        <abp-render-errors [entityControl]="formControls.workCode"></abp-render-errors>
+      </div>
+
+      <!-- Mã đầu việc  -->
+      <div class="p-field col-12 md:col-6">
+        <span class="p-float-label">
+          <input pInputText id="taskCode" formControlName="taskCode" />
+          <label for="headCode">
+            {{ 'Work::TaskCode' | abpLocalization }}
+            <span class="required">*</span>
+          </label>
+        </span>
+        <abp-render-errors [entityControl]="formControls.taskCode"></abp-render-errors>
+      </div>
+
+      <!-- Tên công việc  -->
+      <div class="p-field col-12 md:col-6">
+        <span class="p-float-label">
+          <input pInputText id="name" formControlName="name" />
+          <label for="workName">
+            {{ 'Work::WorkNamee' | abpLocalization }}
+            <span class="required">*</span>
+          </label>
+        </span>
+        <abp-render-errors [entityControl]="formControls.name"></abp-render-errors>
+      </div>
+
+      <!-- Thuộc dự án  -->
+      <div class="p-field col-12 md:col-6">
+        <span class="p-float-label">
+          <p-dropdown
+            [options]="projectOptions"
+            formControlName="projectId"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="{{ 'Work::InProject' | abpLocalization }}"
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+            appendTo="body"
+            inputId="float-label"
+            [autoDisplayFirst]="false"
+            [filter]="true"
+            filterBy="label"
+          ></p-dropdown>
+          <label for="float-label">
+            {{ 'Work::InProject' | abpLocalization }}
+            <span class="required">*</span>
+          </label>
+        </span>
+        <abp-render-errors [entityControl]="formControls.projectId"></abp-render-errors>
+      </div>
+
+      <!-- Mô tả  -->
+      <div class="p-field col-12">
+        <span class="p-float-label">
+          <textarea
+            formControlName="description"
+            id="float-input"
+            rows="5"
+            cols="30"
+            pInputTextarea
+          ></textarea>
+          <label for="float-input">{{ 'Work::Description' | abpLocalization }}</label>
+        </span>
+        <abp-render-errors [entityControl]="formControls.description"></abp-render-errors>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="p-fluid grid pt-4">
+      <!-- Người giao việc -->
+      <div class="p-field col-12 lg:col-4">
+        <abp-user-select
+          formControlName="assigner"
+          label="{{ 'Work::Assigner' | abpLocalization }}"
+        ></abp-user-select>
+        <abp-render-errors [entityControl]="formControls.assigner"></abp-render-errors>
+      </div>
+
+      <!-- Người Owner -->
+      <div class="p-field col-12 lg:col-4">
+        <abp-user-select
+          formControlName="owner"
+          label="{{ 'Work::Owner' | abpLocalization }}"
+        ></abp-user-select>
+        <abp-render-errors [entityControl]="formControls.owner"></abp-render-errors>
+      </div>
+
+      <!-- Người thực hiện -->
+      <div class="p-field col-12 lg:col-4">
+        <abp-user-select
+          formControlName="performer"
+          label="{{ 'Work::Performer' | abpLocalization }}"
+        ></abp-user-select>
+        <abp-render-errors [entityControl]="formControls.performer"></abp-render-errors>
+      </div>
+
+      <!-- Thời gian thực hiện -->
+      <div class="p-field col-12 md:col-6 lg:col-3">
+        <span class="p-float-label">
+          <input pInputText id="duration" formControlName="duration" />
+          <label for="time">{{ 'Work::Duration' | abpLocalization }} (h, d, w)</label>
+        </span>
+        <abp-render-errors [entityControl]="formControls.duration"></abp-render-errors>
+      </div>
+
+      <!-- Ngày bắt đầu -->
+      <div class="p-field col-12 md:col-6 lg:col-3">
+        <span class="p-float-label">
+          <p-calendar
+            name="startDate"
+            formControlName="startDate"
+            [showIcon]="true"
+            dateFormat="dd/mm/yy"
+            appendTo="body"
+          ></p-calendar>
+          <label>{{ 'Work::StartDate' | abpLocalization }}</label>
+        </span>
+      </div>
+
+      <!-- Hạn hoàn thành -->
+      <div class="p-field col-12 md:col-6 lg:col-3">
+        <span class="p-float-label">
+          <p-calendar
+            name="dueDate"
+            formControlName="dueDate"
+            [showIcon]="true"
+            dateFormat="dd/mm/yy"
+            appendTo="body"
+          ></p-calendar>
+          <label>{{ 'Work::DueDate' | abpLocalization }}</label>
+        </span>
+      </div>
+
+      <!-- Độ ưu tiên -->
+      <div class="p-field col-12 md:col-6 lg:col-3">
+        <span class="p-float-label">
+          <p-dropdown
+            [options]="catPriority"
+            formControlName="priority"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="{{ 'Work::Level' | abpLocalization }}"
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+            appendTo="body"
+            inputId="float-label"
+            [autoDisplayFirst]="false"
+          ></p-dropdown>
+          <label for="float-label"
+            >{{ 'Work::Category:Priority' | abpLocalization }}
+            <span class="required">*</span></label
+          >
+        </span>
+        <abp-render-errors [entityControl]="formControls.priority"></abp-render-errors>
+      </div>
+
+      <!-- Điều kiện hoàn thành CV nghiêm ngặt -->
+      <div class="col-12 flex">
+        <p-inputSwitch formControlName="restrictComplete"></p-inputSwitch>
+        <div class="ml-3">{{ 'Work::RestrictComplete' | abpLocalization }}</div>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="p-fluid grid pt-2">
+      <!-- Thêm check list -->
+      <div class="p-field flex flex-column gap-2 col-12 md:col-6 lg:col-4">
+        <div
+          class="_wLabel flex gap-2 font-semibold text-primary-500 cursor-pointer p-1"
+          (click)="addCheckList()"
+        >
+          <div><i class="pi pi-plus-circle text-lg"></i></div>
+          <div>{{ 'Work::AddCheckList' | abpLocalization }}</div>
+        </div>
+        <ng-container formArrayName="checkList">
+          <div *ngFor="let cl of CheckList.controls; index as i">
+            <ng-container [formGroup]="cl">
+              <!-- <p-checkbox formControlName="isCompleted" inputId="ny"></p-checkbox> -->
+              <div class="flex gap-2">
+                <input class="cs-checkbox" type="checkbox" formControlName="isCompleted" />
+                <input class="cs-input" formControlName="title" placeholder="Nhập" />
+                <button
+                  pButton
+                  pRipple
+                  class="p-button-sm p-button-text"
+                  icon="pi pi-trash"
+                  (click)="deleteCheckList(i)"
+                ></button>
+              </div>
+              <abp-render-errors [entityControl]="cl?.controls?.title"></abp-render-errors>
+            </ng-container>
+          </div>
+        </ng-container>
+        <!-- <div *ngFor="let item of checkList" class="field-checkbox ml-2 mb-2">
+          <p-checkbox
+            [label]="item.name"
+            name="group"
+            [value]="item"
+            [(ngModel)]="selectedCheckList"
+          ></p-checkbox>
+        </div> -->
+      </div>
+
+      <!-- Phê duyệt -->
+      <div class="p-field flex flex-column gap-2 col-12 md:col-6 lg:col-4">
+        <div class="_wLabel flex gap-2 font-semibold text-primary-500 cursor-pointer p-1">
+          <div><i class="pi pi-user-plus text-lg"></i></div>
+          <div>{{ 'Work::Approve' | abpLocalization }}</div>
+        </div>
+      </div>
+
+      <!-- Có liên quan -->
+      <div class="p-field flex flex-column gap-2 col-12 md:col-6 lg:col-4">
+        <div
+          class="_wLabel flex gap-2 font-semibold text-primary-500 cursor-pointer p-1"
+          (click)="openCollaborator()"
+        >
+          <div><i class="pi pi-tags text-lg"></i></div>
+          <div>{{ 'Work::Related' | abpLocalization }}</div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-between gap-1">
+      <p-button
+        label="{{ 'Work::Reset' | abpLocalization }}"
+        styleClass="p-button-sm p-button-plain p-button-text"
+      ></p-button>
+      <span>
+        <p-button
+          label="{{ 'Work::Cancel' | abpLocalization }}"
+          (click)="closeWorkAdd.emit(false)"
+          styleClass="p-button-sm p-button-plain p-button-text"
+        ></p-button>
+        <p-button
+          label="{{ 'Work::Save' | abpLocalization }}"
+          (click)="save()"
+          styleClass="p-button-sm"
+          [loading]="isLoading"
+        ></p-button>
+      </span>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<ng-container *ngIf="displayCollaborator">
+  <app-work-collaborator
+    header="{{ 'Work::Collaborator' | abpLocalization }}"
+    [collaborators]="formControls?.collaborators?.value"
+    [displayCollaborator]="displayCollaborator"
+    (submitCollaborator)="submitCollaborator($event)"
+    (closeCollaborator)="closeCollaborator($event)"
+  ></app-work-collaborator
+></ng-container>

@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\common.props" />
+	<Import Project="..\..\configureawait.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<RootNamespace>CSP_NET.Work</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CSP_NET.Work.Domain.Shared\CSP_NET.Work.Domain.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CSP.NotificationConfig.Domain" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Emailing" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Identity.Domain" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.PermissionManagement.Domain.Identity" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.BackgroundJobs.Domain" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.AuditLogging.Domain" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.TenantManagement.Domain" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.FeatureManagement.Domain" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.SettingManagement.Domain" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.OpenIddict.Domain" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.PermissionManagement.Domain.OpenIddict" Version="0.3.7" />
+		<PackageReference Include="CSP.Category.Domain" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.NotificationService.Domain" Version="0.3.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.11" />
+	</ItemGroup>
+
+</Project>

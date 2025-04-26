@@ -1,0 +1,26 @@
+<div class="flex">
+  <span class="p-input-icon-left ml-auto">
+      <i class="pi pi-search"></i>
+      <input pInputText type="text" class="w-20rem" placeholder="Search keyword" />
+  </span>
+</div>
+<div class="p-fluid grid pt-5">
+  <ng-container *ngFor="let item of owners">
+    <div class="p-field sm:col-12 md:col-6 lg:col-4">
+      <p-card styleClass="cursor-pointer">
+        <ng-template pTemplate="header">
+          <div class="relative csImg" >
+            <img alt="Card" [src]="item.image" height="100"/>
+            <h4 class="absolute top-0 pl-4 text-white">{{item.owner}}</h4>
+            <h6 class="absolute pl-4 _bottom text-white">{{item.members}} Member{{item.members > 1 ? "s" : ""}}</h6>
+          </div>
+
+          <h4 class="pl-4">{{item.project}}</h4>
+        </ng-template>
+        <ng-template pTemplate="footer">
+
+        </ng-template>
+      </p-card>
+    </div>
+  </ng-container>
+</div>

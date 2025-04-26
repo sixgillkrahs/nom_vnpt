@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\common.props" />
+	<Import Project="..\..\configureawait.props" />
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<RootNamespace>CSP_NET.Work</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CSP_NET.Work.Application.Contracts\CSP_NET.Work.Application.Contracts.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CSP.Category.HttpApi.Client" Version="0.3.7" />
+		<PackageReference Include="CSP.NotificationConfig.HttpApi.Client" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Account.HttpApi.Client" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Identity.HttpApi.Client" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.PermissionManagement.HttpApi.Client" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.TenantManagement.HttpApi.Client" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.FeatureManagement.HttpApi.Client" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.SettingManagement.HttpApi.Client" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.NotificationService.HttpApi.Client" Version="0.3.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="**\*generate-proxy.json" />
+		<Content Remove="**\*generate-proxy.json" />
+	</ItemGroup>
+
+</Project>

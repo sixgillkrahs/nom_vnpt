@@ -1,0 +1,9 @@
+{
+  "culture": "vi",
+  "texts": {
+    "GeneralProject.00001": "Không tìm thấy dự án với mã {code} từ Pms",
+    "GeneralProject.00002": "Dự án {code} đã được đồng bộ từ trước",
+    "WorkEx:00001": "Mã công việc '{code}' đã tồn tại",
+    "WorkEx:00002": "Tên công việc '{name}' đã tồn tại"
+  }
+}

@@ -1,0 +1,149 @@
+<p-dialog header="{{ menuData.header | abpLocalization }}"
+  [(visible)]="display"
+  [modal]="true"
+  [style]="{width: '800px'}"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="appClose.emit()"
+>
+  <form [formGroup]="formUpdate">
+
+    <div class="p-fluid grid pt-4">
+      <ng-container *ngIf="menuData.parentId">
+
+        <div class="p-field col-12 lg:col-6">
+          <p-selectButton [options]="pathOptions" optionLabel="label" optionValue="value" formControlName="pathMode" (onChange)="changeMode($event)"></p-selectButton>
+        </div>
+
+        <ng-container [ngSwitch]="f['pathMode'].value">
+
+          <div *ngSwitchCase="1" class="p-field col-12 lg:col-12">
+            <span class="p-float-label">
+              <p-treeSelect formControlName="node" [options]="routeProvider" appendTo="body" (onNodeSelect)="onNodeSelect($event)" ></p-treeSelect>
+              <label>{{'Work::Menu:Template' | abpLocalization}}</label>
+            </span>
+            <abp-render-errors
+              [entityControl]="f.node"
+            ></abp-render-errors>
+          </div>
+
+          <div *ngSwitchCase="2" class="p-field col-12">
+            <span class="p-float-label">
+              <input type="text" pInputText formControlName="url" />
+              <label>Url<span class="required">*</span></label>
+            </span>
+          </div>
+
+          <!-- <div *ngSwitchCase="3" class="p-field col-12 lg:col-12">
+            <span class="p-float-label">
+                <p-treeSelect formControlName="node" [options]="routeLinks" appendTo="body" (onNodeSelect)="onNodeSelect($event)" ></p-treeSelect>
+                <label>{{'Work::Menu:Template' | abpLocalization}}</label>
+            </span>
+          </div> -->
+
+        </ng-container>
+
+        <!-- <div *ngIf="f['pathMode'].value ===  1" class="p-field col-12 lg:col-12">
+          <span class="p-float-label">
+            <p-treeSelect formControlName="node" [options]="routeProvider" appendTo="body" (onNodeSelect)="onNodeSelect($event)" ></p-treeSelect>
+            <label>{{'Work::Menu:Template' | abpLocalization}}</label>
+          </span>
+          <abp-render-errors
+            [entityControl]="f.node"
+          ></abp-render-errors>
+        </div>
+
+        <div *ngIf="f['pathMode'].value ===  2" class="p-field col-12">
+          <span class="p-float-label">
+            <input type="text" pInputText formControlName="url" />
+            <label>Url<span class="required">*</span></label>
+          </span>
+        </div>
+
+        <div *ngIf="f['pathMode'].value ===  3" class="p-field col-12">
+          <span class="p-float-label">
+            <p-dropdown [options]="routerLinks" optionLabel="name" optionValue="path" [showClear]="true" appendTo="body" formControlName="routerLink">
+              <ng-template let-routerLink pTemplate="item">
+                <div class="flex flex-column align-items-start gap-2">
+                  <div>{{ localizationLanguage(routerLink.name) }}</div>
+                  <div>{{ routerLink.path }}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+            <label>Path<span class="required">*</span></label>
+          </span>
+        </div> -->
+
+      </ng-container>
+
+      <div class="p-field col-12 lg:col-6">
+        <span class="p-float-label">
+          <input type="text" pInputText formControlName="name" />
+          <label>Label <span style="color: red;">*</span>
+          </label>
+        </span>
+        <abp-render-errors
+          [entityControl]="f.label"
+        ></abp-render-errors>
+      </div>
+
+      <div class="p-field col-12 lg:col-6">
+        <span class="p-float-label">
+          <input type="text" pInputText formControlName="routerLink" />
+          <label>Path </label>
+        </span>
+      </div>
+
+      <div class="p-field col-12 lg:col-6" *ngIf="this.menuData.parentId">
+        <span class="p-float-label">
+          <p-autoComplete formControlName="iconClass" [suggestions]="filteredIcons"
+            (completeMethod)="filterIcon($event)" dataKey="value" field="name" [dropdown]="true" appendTo="body">
+            <ng-template let-icon pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                <i [class]="icon.value"></i>
+                <div>{{ icon.name }}</div>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+          <label>{{'Work::Icon' | abpLocalization}}</label>
+        </span>
+        <abp-render-errors
+          [entityControl]="f.iconClass"
+        ></abp-render-errors>
+      </div>
+
+      <div class="p-field col-12 lg:col-6" *ngIf="false">
+        <span class="p-float-label">
+          <input type="text" pInputText formControlName="requiredPolicy" />
+          <label>RequiredPolicy
+          </label>
+        </span>
+      </div>
+
+      <div class="p-field col-12 lg:col-6">
+        <span class="p-float-label">
+          <p-inputNumber formControlName="order" [showButtons]="true"> </p-inputNumber>
+          <label>{{'Work::Order' | abpLocalization}}</label>
+        </span>
+      </div>
+
+      <div class="p-field col-12 lg:col-6">
+        <div class="p-field-checkbox" style="height: 34px; display: flex; align-items: center">
+          <p-checkbox binary="true" formControlName="isGroup">
+          </p-checkbox>
+          <label class="ml-2">{{'Work::IsGroup' | abpLocalization}}</label>
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-between gap-1">
+      <p-button label="{{ 'Work::Reset' | abpLocalization}}" styleClass="p-button-sm p-button-plain p-button-text"></p-button>
+      <span>
+        <p-button label="{{ 'Work::Cancel' | abpLocalization}}" (click)="appClose.emit(false)" styleClass="p-button-sm p-button-plain p-button-text"></p-button>
+        <p-button label="{{ 'Work::Save' | abpLocalization }}" (click)="save()" styleClass="p-button-sm" [loading]="isLoading"></p-button>
+      </span>
+    </div>
+  </ng-template>
+</p-dialog>

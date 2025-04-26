@@ -1,0 +1,61 @@
+<!-- <p-progressSpinner *ngIf="isLoading" class="loading-spinner"></p-progressSpinner> -->
+<div *ngIf="!isLoading">
+  <p-dialog header="{{ departmentTeamDetailData.header | abpLocalization }}"
+    [(visible)]="displayDepartmentTeamDetail" [modal]="true" [style]="{ width: '70%', height:'70%'}"
+    [draggable]="false" [resizable]="false" (onHide)="closeContainer.emit(false)" [responsive]="true">
+    <form [formGroup]="formGroup">
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Input name và code -->
+          <div class="form-group">
+            <label for="name">Tên: <span class="required">*</span></label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="code">Mã: <span class="required">*</span></label>
+            <!-- <input type="text" class="form-control" id="code" [(ngModel)]="newDepartmentTeam.code"> -->
+            <input type="text" class="form-control" id="code" formControlName="code" />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="department">Phòng ban: </label>
+        <p-dropdown id="organizationLookup" class="form-control" [options]="organizationLookupData"
+          formControlName="departmentID" optionLabel="displayName" optionValue="id"
+          placeholder="Chọn phòng ban"></p-dropdown>
+      </div>
+      <!-- Input Description -->
+      <div class="form-group">
+        <label for="description">Mô tả:</label>
+        <textarea class="form-control" id="description" formControlName="description"></textarea>
+      </div>
+      <!-- Button thêm mới -->
+      <!-- Component HTML Template -->
+      <div class="picklist-container" style="padding-top: 10px;">
+        <p-table [value]="targetUsers">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>STT</th>
+              <th>Tên đăng nhập</th>
+              <th>Email</th>
+              <!-- <th>Ngày sinh</th> -->
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-targetUsers let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ rowIndex + 1 }}</td>
+              <td>{{ targetUsers.userName }}</td>
+              <td>{{ targetUsers.email }}</td>
+              <!-- <td>{{ targetUsers.dob }}</td> -->
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <!-- end -->
+
+    </form>
+
+  </p-dialog>
+</div>

@@ -1,0 +1,45 @@
+<p-dialog
+  header="{{ projectDetailData.header | abpLocalization }}"
+  [(visible)]="displayProjectContainer"
+  [modal]="true"
+  [style]="{ width: '70%', height: '100%' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeProjectContainer.emit(false)"
+>
+  <p-tabView (onChange)="tabViewIndex($event)" [activeIndex]="projectDetailData.active">
+    <p-tabPanel header="{{ 'Work::Pm:Project.State' | abpLocalization }}">
+      <app-state></app-state>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'Work::Pm:Project.Process' | abpLocalization }}">
+      <ng-template pTemplate="content">
+     <!-- gdgf45 -->
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'Work::Pm:Project.Work.Template' | abpLocalization }}">
+      <ng-template pTemplate="content">
+        <!-- 454545 -->
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'Work::Pm:Project.Members' | abpLocalization }}">
+      <app-project-members></app-project-members>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'Work::Pm:Project.Works' | abpLocalization }}">
+      <!-- <app-project-works></app-project-works> -->
+      <!-- <app-work-list [card]="false"></app-work-list> -->
+    </p-tabPanel>
+
+  </p-tabView>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-end gap-1" *ngIf="selectedIndex === 0 && actions">
+      <p-button label="{{ 'Work::Save' | abpLocalization }}" (click)="save()" styleClass="p-button-sm p-button-info" [loading]="isLoading"></p-button>
+    </div>
+  </ng-template>
+
+</p-dialog>
+

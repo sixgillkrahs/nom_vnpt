@@ -1,0 +1,69 @@
+<p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
+<div class="mb-5"></div>
+
+<p-progressSpinner *ngIf="isLoading" class="loading-spinner"></p-progressSpinner>
+<div class="card" [abpLoading]="" *ngIf="!isLoading">
+
+  <p-table [value]="departmentTeam" styleClass="p-datatable-striped"
+    [(selection)]="selectedTeams"
+    [paginator]="true" [rows]="10"
+    [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+
+      <div class="flex gap-3">
+        <p-button label="{{'Thêm mới' | abpLocalization }}" styleClass="p-button-sm"(click)="showModal()"></p-button>
+
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" class="w-20rem" [(ngModel)]="keyword" (input)="onInputChange()"
+            (keyup.enter)="getListClientId()" placeholder="{{'Work::Search' | abpLocalization}}" />
+        </span>
+
+
+        <p-dropdown id="organizationLookup" styleClass="w-20rem" [options]="organizationLookupData"
+          [(ngModel)]="selectedOrganization" [showClear]="true" optionLabel="displayName" (onChange)="getListClientId()"
+          placeholder="Chọn phòng ban"></p-dropdown>
+
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{'Mã' | abpLocalization}}</th>
+        <th>{{'Tên' | abpLocalization}}</th>
+        <th>{{'Phòng ban' | abpLocalization}}</th>
+        <th>{{'Trạng thái' | abpLocalization}}</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-team>
+      <tr>
+        <td>{{ team.code }}</td>
+        <td>{{ team.name }}</td>
+        <td>{{ team.departmentName }}</td>
+        <td><p-checkbox name="group" [value]="team" [(ngModel)]="departmentTeam" [inputId]="team.status"
+            [disabled]="true"></p-checkbox></td>
+        <!-- <td>{{ team.status === 1 ? 'Hoạt động' : 'Không hoạt động' }}</td> -->
+        <td>
+          <cs-tieredMenu (buttonItem)="dropdownItemsButton(team)" [items]="actionItems" ></cs-tieredMenu>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-container *ngIf="displayDepartmentTeamContainer">
+  <app-department-team-container [displayDepartmentTeamContainer]="displayDepartmentTeamContainer"
+    [departmentTeamDetailData]="departmentTeamDetailData"
+    (closeContainer)="closeContainer($event)"></app-department-team-container>
+</ng-container>
+
+<ng-container *ngIf="displayDepartmentTeamDetail">
+  <app-department-team-detail [displayDepartmentTeamDetail]="displayDepartmentTeamDetail"
+    [departmentTeamDetailData]="departmentTeamDetailData"
+    (closeContainer)="closeContainer($event)"></app-department-team-detail>
+</ng-container>
+<!-- Câu hình phê duyệt -->
+<ng-container *ngIf="displayApproval">
+  <app-configuration-approval [displayApproval]="displayApproval"  [departmentTeamDetailData]="departmentTeamDetailData" (closeContainer)="closeContainer($event)"></app-configuration-approval>
+</ng-container>
+<!--  -->

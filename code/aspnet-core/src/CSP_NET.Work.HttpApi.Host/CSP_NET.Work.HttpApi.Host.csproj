@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<Import Project="..\..\common.props" />
+	<Import Project="..\..\configureawait.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<RootNamespace>CSP_NET.Work</RootNamespace>
+		<PreserveCompilationReferences>true</PreserveCompilationReferences>
+		<UserSecretsId>CSP_NET.Work-4681b4fd-151f-4221-84a4-929d86723e4c</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Hangfire.SqlServer" Version="1.8.2" />
+		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="7.0.15" />
+		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="7.0.0" />
+		<PackageReference Include="DistributedLock.Redis" Version="1.0.2" />
+		<PackageReference Include="CTIN.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Autofac" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Caching.StackExchangeRedis" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.DistributedLocking" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.AspNetCore.Serilog" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.Swashbuckle" Version="0.3.7" />
+		<PackageReference Include="CTIN.Abp.BlobStoring.Minio" Version="0.3.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CSP_NET.Work.Application\CSP_NET.Work.Application.csproj" />
+		<ProjectReference Include="..\CSP_NET.Work.EntityFrameworkCore\CSP_NET.Work.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\CSP_NET.Work.HttpApi\CSP_NET.Work.HttpApi.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="Logs\**" />
+		<Content Remove="Logs\**" />
+		<EmbeddedResource Remove="Logs\**" />
+		<None Remove="Logs\**" />
+	</ItemGroup>
+
+</Project>

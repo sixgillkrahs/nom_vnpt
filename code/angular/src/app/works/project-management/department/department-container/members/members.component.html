@@ -1,0 +1,42 @@
+<div class="flex">
+  <span class="p-input-icon-left ml-auto">
+      <i class="pi pi-search"></i>
+      <input pInputText type="text" [(ngModel)]="searchValue" (input)="search()" class="w-20rem" placeholder="Search keyword" />
+  </span>
+</div>
+
+<div class="p-fluid grid pt-5">
+
+  <ng-container *ngFor="let item of (keyS === true ? paginatorSearchResult : paginatorMember)">
+    <div class="p-field col-12 lg:col-6">
+      <div class="card">
+        <div class="flex">
+          <div class="flex-initial flex align-items-center justify-content-center flex-column">
+            <p-image src="{{item.avatar ===! null ? item.avatar : 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png'}}" alt="Image" width="110" height="110" ></p-image>
+            <span class="mt-2 font-medium">{{item.username}}</span>
+          </div>
+          <div class="flex-initial flex justify-content-start flex-column">
+            <h3 class="mt-2 _name">{{item.fullname}}</h3>
+            <div class="flex">
+              <span class="font-bold w-6rem">Oranization: </span>
+              <span>{{item.oranization}}</span>
+            </div>
+            <div class="flex">
+              <span class="font-bold w-6rem">Position: </span>
+              <span>{{item.position}}</span>
+            </div>
+            <div class="flex">
+              <span class="font-bold w-6rem">Team: </span>
+              <span>{{item.team.toString()}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</div>
+
+<div class="card flex justify-content-center">
+  <p-paginator (onPageChange)="onPageChange($event)" [totalRecords]="totalRecords" [rows]="rows" [first]="first"></p-paginator>
+</div>
